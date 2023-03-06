@@ -1,14 +1,11 @@
-Some of the funtions that are needed are only in R so I'm going to try to use R instead 
+# Importing Packages
 
-
-Importing Packages
-```r
 library(clusgap)
-library(kproto) 
-```
+library(kproto)
+
 
 Loading the Data
-```r
+
 # set the correct file Path
 setwd("C:\Users\jdrel\OneDrive\Documents\Data_Science\Springboard\Capstone-2")
 
