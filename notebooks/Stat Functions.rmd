@@ -1,0 +1,11 @@
+Some of the funtions that are needed are only in R so I'm going to try to use R instead 
+
+
+```{r}
+# set the correct file Path
+
+# Load the data
+data <- read.csv("") 
+
+
+```
