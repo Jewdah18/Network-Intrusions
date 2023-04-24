@@ -1,7 +1,16 @@
+import numpy as np
 import pandas as pd
+import os 
+from sklearn.linear_model import Lasso
+from sklearn.model_selection import GridSearchCV
 
-df = pd.read_csv(r'C:\Users\jdrel\OneDrive\Documents\Data_Science\Springboard\Capstone-2\data\processed\Full KDD Data.csv')
-df_y = pd.concat([df, data['labels']], axis = 1)
+# import data to the script
+df_y = pd.read_csv(r'C:\Users\jdrel\OneDrive\Documents\Data_Science\Springboard\Capstone-2\data\processed\Full KDD Data.csv')
+# drop labels to have only features
+df = df_y.drop('labels', axis = 1)
+
+relevent_features = []
+
 for label_i in df_y['labels'].unique():
     for label_j in df_y['labels'].unique():
         # Take only the data that has smurf or neptune
@@ -26,14 +35,12 @@ for label_i in df_y['labels'].unique():
         print("Best hyperparameters: ", grid_search.best_params_)
         
         # Find the coefficients of lasso regularization
-        lasso = Lasso(alpha = .001)
+        lasso = Lasso(alpha = grid_search.best_params_)
+
         # Fit the lasso regularization to the data 
         lasso.fit(x_blue, y_diff_attacks)
+
         # Create a dictionary of all the features and their corresponding lasso coefficients
-        lasso_dict = {df.columns[i]:lasso.coef_[i] for i in range(len(df.columns)) if list(lasso.coef_)[i] != 0}
-        # Create a list of all the features that don't have a lasso coefficient of zero
-        lasso_features = [df.columns[i] for i in range(len(df.columns)) if list(lasso.coef_)[i] != 0]
-        # Print the features and coefficients
-        print(lasso_dict)
-        # Print the number of features are left from lasso
-        print(len(lasso_dict))
+        lasso_list = [df.columns[i] for i in range(len(df.columns)) if list(lasso.coef_)[i] != 0]
+
+        relevent_features.extend(lasso_list)
