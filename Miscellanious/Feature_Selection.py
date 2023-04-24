@@ -46,3 +46,5 @@ for label_i in df_y['labels'].unique():
             lasso_list = [df.columns[i] for i in range(len(df.columns)) if list(lasso.coef_)[i] != 0]
 
             relevent_features.extend(lasso_list)
+
+print(relevent_features)
