@@ -7,13 +7,15 @@ from tqdm import tqdm
 # import data to the script
 df_y = pd.read_csv(r'C:\Users\jdrel\OneDrive\Documents\Data_Science\Springboard\Capstone-2\data\processed\Full KDD Data.csv')
 # drop labels to have only features
-df = df_y.drop('labels', axis = 1)
+df = df_y.drop(['Unnamed: 0','labels'], axis = 1)
 
 relevent_features = []
 # Iterate over all the types of intrusions 
 for i, label_i in tqdm(enumerate(df_y['labels'].unique())):
+    print(label_i)
     # Iterate over a different intrusion
     for j, label_j in tqdm(enumerate(df_y['labels'].unique())):
+        print(label_j)
         if label_i != label_j:
             # Take only the data that has smurf or neptune
             blue_data = df_y.loc[df_y['labels'].isin([label_i,label_j])]
