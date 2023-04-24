@@ -14,7 +14,7 @@ relevent_features = []
 # Iterate over all the types of intrusions 
 for i, label_i in tqdm(enumerate(df_y['labels'].unique())):
     # Iterate over a different intrusion
-    for label_j in df_y['labels'].unique():
+    for j, label_j in tqdm(enumerate(df_y['labels'].unique())):
         if label_i != label_j:
             # Take only the data that has smurf or neptune
             blue_data = df_y.loc[df_y['labels'].isin([label_i,label_j])]
@@ -23,7 +23,7 @@ for i, label_i in tqdm(enumerate(df_y['labels'].unique())):
             # create y that is 0 for smurf and 1 for neptune
             y_diff_attacks = np.where(blue_data['labels'] == 'label_i', 0, 1)
             # Create Lasso model
-            lasso = Lasso(max_iter = 100000)
+            lasso = Lasso(max_iter = 200000)
 
             # Define hyperparameter grid with a value less than 00.5 since that was the be
             params = {'alpha': np.linspace(.001, 5, 20)}
