@@ -16,7 +16,7 @@ for i, label_i in tqdm(enumerate(df_y['labels'].unique())):
     # Iterate over a different intrusion
     for j, label_j in tqdm(enumerate(df_y['labels'].unique())):
         print(label_j)
-        if label_i != label_j:
+        if i < j:
             # Take only the data that has smurf or neptune
             blue_data = df_y.loc[df_y['labels'].isin([label_i,label_j])]
             # Grab only the features
