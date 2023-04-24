@@ -35,4 +35,4 @@ for i, label_i in tqdm(enumerate(df_y['labels'].unique())):
 
             relevent_features.extend(lasso_list)
 
-print(relevent_features)
+print(set(relevent_features))
