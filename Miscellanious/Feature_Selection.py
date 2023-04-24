@@ -3,6 +3,7 @@ import pandas as pd
 import os 
 from sklearn.linear_model import Lasso
 from sklearn.model_selection import GridSearchCV
+from tqdm import tqdm
 
 # import data to the script
 df_y = pd.read_csv(r'C:\Users\jdrel\OneDrive\Documents\Data_Science\Springboard\Capstone-2\data\processed\Full KDD Data.csv')
@@ -11,7 +12,7 @@ df = df_y.drop('labels', axis = 1)
 
 relevent_features = []
 # Iterate over all the types of intrusions 
-for label_i in df_y['labels'].unique():
+for i, label_i in tqdm(enumerate(df_y['labels'].unique())):
     # Iterate over a different intrusion
     for label_j in df_y['labels'].unique():
         if label_i != label_j:
