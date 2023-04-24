@@ -23,10 +23,10 @@ for i, label_i in tqdm(enumerate(df_y['labels'].unique())):
             # create y that is 0 for smurf and 1 for neptune
             y_diff_attacks = np.where(blue_data['labels'] == 'label_i', 0, 1)
             # Create Lasso model
-            lasso = Lasso(max_iter = 200000)
+            lasso = Lasso(max_iter = 50000)
 
             # Define hyperparameter grid with a value less than 00.5 since that was the be
-            params = {'alpha': np.linspace(.001, 5, 20)}
+            params = {'alpha': np.linspace(.01, 5, 20)}
 
             # Perform grid search
             grid_search = GridSearchCV(estimator=lasso, param_grid=params, cv=8)
