@@ -4,7 +4,7 @@ from kmodes.kprototypes import KPrototypes
 from tqdm import tqdm
 
 df_y = pd.read_csv('./data/processed/KDD Data.csv')
-df = df_y.drop(['Unnamed: 0', 'labels'] axis = 1)
+df = df_y.drop(['Unnamed: 0', 'labels'], axis = 1)
 
 cats = ['service', 'flag', 'protocol_type']
 
