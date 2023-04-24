@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 import os 
 from sklearn.linear_model import Lasso
-from sklearn.model_selection import GridSearchCV
 from tqdm import tqdm
 
 # import data to the script
@@ -22,23 +21,10 @@ for i, label_i in tqdm(enumerate(df_y['labels'].unique())):
             x_blue = blue_data.drop('labels', axis = 1)
             # create y that is 0 for smurf and 1 for neptune
             y_diff_attacks = np.where(blue_data['labels'] == 'label_i', 0, 1)
-            # Create Lasso model
-            lasso = Lasso(max_iter = 50000)
 
-            # Define hyperparameter grid with a value less than 00.5 since that was the be
-            params = {'alpha': np.linspace(.01, 5, 20)}
-
-            # Perform grid search
-            grid_search = GridSearchCV(estimator=lasso, param_grid=params, cv=8)
-
-            # fit the gridsearch of parameters to the data
-            grid_search.fit(x_blue, y_diff_attacks)
-
-            # Print best hyperparameters
-            print("Best hyperparameters: ", grid_search.best_params_)
-            
-            # Find the coefficients of lasso regularization
-            lasso = Lasso(alpha = grid_search.best_params_)
+            # Lasso would not converge and it would take too long to use gridsearch
+            # most of the time alpha values were from .001 to .002
+            lasso = Lasso(alpha = .002)
 
             # Fit the lasso regularization to the data 
             lasso.fit(x_blue, y_diff_attacks)
