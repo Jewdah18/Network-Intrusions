@@ -24,7 +24,7 @@ for i, label_i in tqdm(enumerate(df_y['labels'].unique())):
 
             # Lasso would not converge and it would take too long to use gridsearch
             # most of the time alpha values were from .001 to .002
-            lasso = Lasso(alpha = .002)
+            lasso = Lasso(alpha = .002,max_iter = 100000)
 
             # Fit the lasso regularization to the data 
             lasso.fit(x_blue, y_diff_attacks)
