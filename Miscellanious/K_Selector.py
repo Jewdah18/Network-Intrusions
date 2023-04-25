@@ -20,7 +20,7 @@ for prefix in cats:
 cost = []
 
 # Iterate for different amounts of centroids
-for k in tqdm(range(6,11)):
+for k in tqdm(range(10,13)):
     # Use K-Prototype to generate a model. These parameters can change but hopefully we find something good
     KProto = KPrototypes(n_clusters = k, init = 'Cao', n_init = 10, 
                          gamma = 0.125,  verbose = 0, n_jobs = -1)
@@ -30,10 +30,15 @@ for k in tqdm(range(6,11)):
     cost.append(KProto.cost_) 
 
 # An elbow plot of k vs the cost function to try to find the optimal k
-plt.plot(range(6,11), cost, marker = 'o');
+plt.plot(range(10,13), cost, marker = 'o');
 # Label the x-axis
 plt.xlabel('Number of Clusters');
 #label the y-axis
 plt.ylabel('Dissimilarity');
 #Give the plot a title
 plt.title('Elbow Plot for KPrototypes');
+# Show the plot
+plt.show()
+
+print(cost)
+
