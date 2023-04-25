@@ -30,7 +30,7 @@ for k in tqdm(range(6,11)):
     cost.append(KProto.cost_) 
 
 # An elbow plot of k vs the cost function to try to find the optimal k
-plt.plot(range(3,11), cost, marker = 'o');
+plt.plot(range(6,11), cost, marker = 'o');
 # Label the x-axis
 plt.xlabel('Number of Clusters');
 #label the y-axis
