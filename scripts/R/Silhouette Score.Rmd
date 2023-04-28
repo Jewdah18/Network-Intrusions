@@ -1,0 +1,87 @@
+# %% [markdown]
+# This notebook is to compute the sillhouette scores for clusters in the network intrusion dataset. Because there is no python equivalent to the daisy() function in r, it makes sense for me to compute the silhouette scores in r
+
+# %%
+# Importing Packages
+library(cluster)
+library(clustMixType)
+
+# %% [markdown]
+# Set the file path to avoid loading confusion
+
+# %%
+# set the correct file Path
+setwd("C:/Users/jdrel/OneDrive/Documents/Data_Science/Springboard/Capstone-2")
+
+# %% [markdown]
+# Load the Data
+
+# %%
+# Loading X_scaled as the data
+data <- read.csv("./data/interim/X_scaled.csv")
+# Loading the list of clusters where k = 8
+clusters <- read.csv("./data/interim/clusters.csv")
+
+# %% [markdown]
+# Change the type of the last 7 columns to factor
+
+# %%
+# Create a loop for numbers 36-42
+for (i in 36:42) {
+    # Reassign those columns as factors
+    data[i] <- lapply(data[i], factor)
+}
+
+# %% [markdown]
+# Initialize the variables that will be long lists
+
+# %%
+#Initialize Silhouette Scores
+sil_score <- numeric()
+# Initialize dissimilarity matrix for each row
+diss_mat <- numeric()
+
+# %% [markdown]
+# Perform the Silhouette calculations
+
+# %%
+# Create the first loop that will loop through all the rows
+pb <- txtProgressBar(min = 1, max = nrow(data), style = 3)
+for (i in seq_len(1)) {
+    for (j in seq_len(5)) {
+        # Create a progress bar to see how much of the loop is complete
+        setTxtProgressBar(pb,j)
+        # combine two rows at a time to make it small enough to handle
+        rows <- rbind(data[1, ], data[j, ])
+        # Create dissimilarity matrix to compare the points in the selected rows
+        diss_mat_temp <- daisy(rows, metric = "gower",
+                        type = list(as.integer = seq_len(35),
+                                    as.character = 36:42))
+        # Change dissmat to a list so it can be flattened
+        diss_mat <- c(diss_mat, as.integer(diss_mat_temp))
+  }
+    print(length(diss_mat))
+    # Get the label for that specific row
+    label <- clusters$cluster[i]
+    print(label)
+    # Run the silhouette score for that row
+    sil_score <- c(sil_score, silhouette(diss_mat, label)[, 3])
+}
+
+# Print out the silhouette score
+print(mean(sil_score))
+
+# %%
+# Initialize dissimilarity matrix for each row
+diss_mat <- numeric()
+# combine two rows at a time to make it small enough to handle
+rows <- rbind(data[1, ], data[2, ])
+# Create dissimilarity matrix to compare the points in the selected rows
+diss_mat_temp <- daisy(rows, metric = "gower",
+                       type = list(as.integer = seq_len(35),
+                                   as.character = 36:42))
+# Change dissmat to a list so it can be flattened
+diss_mat <- c(diss_mat, as.numeric(diss_mat_temp))
+print(diss_mat)
+
+
