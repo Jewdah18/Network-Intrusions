@@ -1,7 +1,7 @@
 Capstone-2
 ==============================
 
-![cover_photo](./Miscellanious/Cybersecurity.jpg)
+![cover_photo](/Miscellanious/Cybersecurity.jpg)
 
 Analyzing TCP data dumps to predict network intrusions
 
