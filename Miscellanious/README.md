@@ -1,7 +1,10 @@
 Capstone-2
 ==============================
 
+![cover_photo](./miscellanious/Cybersecurity.jpg)
+
 Analyzing TCP data dumps to predict network intrusions
+
 
 Project Organization
 ------------
@@ -50,7 +53,6 @@ Project Organization
     │       └── visualize.py
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
-
 
 --------
 
