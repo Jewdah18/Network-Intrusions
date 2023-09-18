@@ -12,7 +12,7 @@ Program created one of the few publicly available datasets that has enough infor
 an IDS. The purpose of this project was to build an effective IDS from the DARPA dataset. I 
 accomplished the first part of an IDS by clustering the observations and analyzing the likelihood 
 that a given cluster would hold an attack. For the predictive part, I built both a Neural Network 
-model and a Random Forest classifier that perfomed significantly better than a trivial classifier. 
+model and a Random Forest classifier that performed significantly better than a trivial classifier. 
 However there were still some intrusions such as snmp attacks that the model was unable to 
 identify. I tried to come up with new ideas for how to detect these intrusion types but my 
 attempts were unsuccessful and so it still remains an open question.  
